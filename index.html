@@ -46,14 +46,14 @@ h1{font-size:clamp(2.6rem,7vw,5.8rem);line-height:.92;margin:12px 0 18px}
 .modal-box p{margin:0;color:var(--muted);line-height:1.65;font-size:1rem}
 .modal-close{position:absolute;top:14px;right:14px;border:0;background:#f1f4f7;width:38px;height:38px;border-radius:50%;font-size:1.25rem;cursor:pointer;color:var(--ink)}
 .modal-close:hover,.modal-close:focus-visible{background:#e6ebf0;outline:3px solid rgba(246,183,0,.35)}
-section{padding:64px 0}
+section{padding:64px 0;scroll-margin-top:18px}
 h2{font-size:clamp(2rem,4vw,3.2rem);margin:0 0 12px}
 .sub{color:var(--muted);max-width:720px;line-height:1.55;margin-bottom:28px}
 .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.service{background:#fff;border-radius:18px;padding:24px;box-shadow:0 10px 34px #17202a14;border-top:5px solid var(--accent)}
+.service{background:#fff;border-radius:18px;padding:24px;box-shadow:0 10px 34px #17202a14;border-top:5px solid var(--accent);display:flex;flex-direction:column;min-height:240px;transition:.2s ease}
 .icon{font-size:2rem}
 .service h3{margin:10px 0 5px;font-size:1.15rem}
-.service p{margin:0;color:var(--muted);line-height:1.45}
+.service p{margin:0;color:var(--muted);line-height:1.45}.service:hover{transform:translateY(-3px);box-shadow:0 16px 38px #17202a20}.service-cta{margin-top:auto;padding-top:18px}.service-cta button{width:100%;border:0;border-radius:999px;padding:12px 16px;background:var(--accent);color:#111;font-weight:900;cursor:pointer}.service-cta button:hover,.service-cta button:focus-visible{filter:brightness(.96);outline:3px solid rgba(246,183,0,.35)}
 .band{background:var(--accent);padding:34px 0}
 .band-grid{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center}
 .band h2{margin:0;font-size:2.25rem}
@@ -142,12 +142,42 @@ footer{background:var(--ink);color:#dce3eb;padding:25px 0;text-align:center}
     <h2>Os nossos serviços</h2>
     <p class="sub">Serviços práticos para manutenção e melhoria da sua casa, com orçamento sem compromisso.</p>
     <div class="services">
-      <div class="service"><div class="icon">🏠</div><h3>Lavagem de telhados</h3><p>Limpeza cuidada para recuperar o aspeto do telhado.</p></div>
-      <div class="service"><div class="icon">🎨</div><h3>Pintura</h3><p>Trabalhos de pintura e retoques em interiores e exteriores.</p></div>
-      <div class="service"><div class="icon">🔧</div><h3>Manutenção</h3><p>Pequenas intervenções e manutenção geral da casa.</p></div>
-      <div class="service"><div class="icon">🖼️</div><h3>Montagem de quadros</h3><p>Fixação e montagem cuidadosa de quadros e elementos decorativos.</p></div>
-      <div class="service"><div class="icon">⚙️</div><h3>Soldadura</h3><p>Pequenos trabalhos de soldadura e reparação metálica.</p></div>
-      <div class="service"><div class="icon">🔨</div><h3>Pequenos arranjos</h3><p>Reparações e ajustes do dia a dia para manter tudo a funcionar.</p></div>
+      <div class="service">
+        <div class="icon">🏠</div><h3>Lavagem de telhados</h3>
+        <p>Limpeza cuidada para recuperar o aspeto do telhado.</p>
+        <div class="service-cta"><button type="button" data-service="Lavagem de telhados">Pedir orçamento</button></div>
+      </div>
+      <div class="service">
+        <div class="icon">🎨</div><h3>Pintura</h3>
+        <p>Trabalhos de pintura e retoques em interiores e exteriores.</p>
+        <div class="service-cta"><button type="button" data-service="Pintura">Pedir orçamento</button></div>
+      </div>
+      <div class="service">
+        <div class="icon">🔧</div><h3>Manutenção</h3>
+        <p>Pequenas intervenções e manutenção geral da casa.</p>
+        <div class="service-cta"><button type="button" data-service="Manutenção">Pedir orçamento</button></div>
+      </div>
+      <div class="service">
+        <div class="icon">🖼️</div><h3>Montagem de quadros</h3>
+        <p>Fixação e montagem cuidadosa de quadros e elementos decorativos.</p>
+        <div class="service-cta"><button type="button" data-service="Montagem de quadros / espelhos">Pedir orçamento</button></div>
+      </div>
+      <div class="service">
+        <div class="icon">⚙️</div><h3>Soldadura</h3>
+        <p>Pequenos trabalhos de soldadura e reparação metálica.</p>
+        <div class="service-cta"><button type="button" data-service="Soldadura">Pedir orçamento</button></div>
+      </div>
+      <div class="service">
+        <div class="icon">🔨</div><h3>Pequenos arranjos</h3>
+        <p>Reparações e ajustes do dia a dia para manter tudo a funcionar.</p>
+        <div class="service-cta"><button type="button" data-service="Pequenos arranjos">Pedir orçamento</button></div>
+      </div>
+
+      <div class="service">
+        <div class="icon">➕</div><h3>Outros serviços</h3>
+        <p>Tem outro trabalho em mente? Fale connosco e explique o que precisa.</p>
+        <div class="service-cta"><button type="button" data-service="Outro">Pedir orçamento</button></div>
+      </div>
     </div>
   </div>
 </section>
@@ -258,7 +288,7 @@ document.addEventListener('keydown', (event) => {
 
       <div class="quote-field full">
         <label for="qDetails">Descrição do trabalho</label>
-        <textarea id="qDetails" name="details" placeholder="Explique brevemente o que precisa..." required></textarea>
+        <textarea id="qDetails" name="details" placeholder="Explique brevemente o que precisa... (opcional)"></textarea>
       </div>
 
       <div class="quote-actions">
@@ -277,6 +307,16 @@ const quoteModal = document.getElementById('quoteModal');
 const openQuoteForm = document.getElementById('openQuoteForm');
 const quoteClose = quoteModal.querySelector('.quote-close');
 const quoteForm = document.getElementById('quoteForm');
+
+document.querySelectorAll('.service-cta button').forEach((button) => {
+  button.addEventListener('click', () => {
+    openQuoteModal();
+    const select = document.getElementById('qService');
+    if (select) {
+      select.value = button.dataset.service;
+    }
+  });
+});
 
 function openQuoteModal(){
   quoteModal.classList.add('open');
