@@ -109,7 +109,7 @@ footer{background:var(--ink);color:#dce3eb;padding:25px 0;text-align:center}
         <p class="lead">Lavagem de telhados, pintura, manutenção, montagem de quadros, soldadura e pequenos arranjos em Cascais e arredores.</p>
         <div class="ctas">
           <a class="btn btn-main" href="#servicos">Ver serviços</a>
-          <button class="btn btn-whatsapp" id="openQuoteForm" type="button">Pedir orçamento grátis</button>
+          <button class="btn btn-whatsapp" id="openQuoteForm" type="button" onclick="openQuoteModal(); return false;">Pedir orçamento grátis</button>
         </div>
       </div>
       <div class="hero-card">
@@ -287,7 +287,6 @@ function closeQuoteModal(){
   quoteModal.classList.remove('open');
   quoteModal.setAttribute('aria-hidden','true');
 }
-openQuoteForm.addEventListener('click', openQuoteModal);
 quoteClose.addEventListener('click', closeQuoteModal);
 quoteModal.addEventListener('click', (event) => {
   if(event.target === quoteModal) closeQuoteModal();
@@ -315,7 +314,7 @@ Tipo de trabalho: ${service}
 Descrição: ${details}`;
 
   const url = 'https://wa.me/351929406461?text=' + encodeURIComponent(message);
-  window.location.href = url;
+  window.location.assign(url);
 });
 </script>
 
