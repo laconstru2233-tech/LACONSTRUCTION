@@ -37,7 +37,15 @@ h1{font-size:clamp(2.6rem,7vw,5.8rem);line-height:.92;margin:12px 0 18px}
 .hero-card h3{margin:0 0 12px;font-size:1.45rem}
 .hero-card p{color:var(--muted);line-height:1.5}
 .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
-.trust div{background:#f1f4f7;border-radius:13px;padding:14px 10px;font-weight:800;text-align:center;font-size:.9rem}
+.trust button{appearance:none;border:0;width:100%;background:#f1f4f7;border-radius:13px;padding:14px 10px;font-weight:800;text-align:center;font-size:.9rem;color:var(--ink);cursor:pointer;transition:.2s ease}
+.trust button:hover,.trust button:focus-visible{transform:translateY(-2px);background:#e6ebf0;outline:3px solid rgba(246,183,0,.35)}
+.modal-backdrop{position:fixed;inset:0;background:rgba(9,17,27,.62);display:none;align-items:center;justify-content:center;padding:20px;z-index:9999}
+.modal-backdrop.open{display:flex}
+.modal-box{width:min(520px,100%);background:#fff;color:var(--ink);border-radius:22px;padding:28px;box-shadow:0 30px 80px #0007;position:relative}
+.modal-box h3{margin:0 40px 12px 0;font-size:1.65rem}
+.modal-box p{margin:0;color:var(--muted);line-height:1.65;font-size:1rem}
+.modal-close{position:absolute;top:14px;right:14px;border:0;background:#f1f4f7;width:38px;height:38px;border-radius:50%;font-size:1.25rem;cursor:pointer;color:var(--ink)}
+.modal-close:hover,.modal-close:focus-visible{background:#e6ebf0;outline:3px solid rgba(246,183,0,.35)}
 section{padding:64px 0}
 h2{font-size:clamp(2rem,4vw,3.2rem);margin:0 0 12px}
 .sub{color:var(--muted);max-width:720px;line-height:1.55;margin-bottom:28px}
@@ -89,9 +97,21 @@ footer{background:var(--ink);color:#dce3eb;padding:25px 0;text-align:center}
         <h3>LA Construction</h3>
         <p>Uma solução simples para cuidar, reparar e melhorar a sua casa.</p>
         <div class="trust">
-          <div>Qualidade</div>
-          <div>Confiança</div>
-          <div>Resposta rápida</div>
+          <button type="button" class="trust-item"
+            data-title="Qualidade"
+            data-text="Procuramos os melhores materiais e as melhores soluções ao melhor preço. Trabalhamos de forma limpa, cuidada e com atenção aos detalhes, procurando sempre o melhor acabamento possível.">
+            Qualidade
+          </button>
+          <button type="button" class="trust-item"
+            data-title="Confiança"
+            data-text="Cumprimos os prazos acordados e respeitamos a sua privacidade, a sua casa e o seu espaço durante todo o trabalho.">
+            Confiança
+          </button>
+          <button type="button" class="trust-item"
+            data-title="Resposta rápida"
+            data-text="Respondemos rapidamente aos pedidos e procuramos enviar o seu orçamento em menos de 24 horas.">
+            Resposta rápida
+          </button>
         </div>
       </div>
     </div>
@@ -141,5 +161,44 @@ footer{background:var(--ink);color:#dce3eb;padding:25px 0;text-align:center}
 <footer>
   <div class="wrap">LA Construction · Cascais e arredores</div>
 </footer>
+
+<div class="modal-backdrop" id="trustModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="trustModalTitle">
+    <button class="modal-close" type="button" aria-label="Fechar">×</button>
+    <h3 id="trustModalTitle"></h3>
+    <p id="trustModalText"></p>
+  </div>
+</div>
+
+<script>
+const trustModal = document.getElementById('trustModal');
+const trustModalTitle = document.getElementById('trustModalTitle');
+const trustModalText = document.getElementById('trustModalText');
+const trustClose = trustModal.querySelector('.modal-close');
+
+document.querySelectorAll('.trust-item').forEach((button) => {
+  button.addEventListener('click', () => {
+    trustModalTitle.textContent = button.dataset.title;
+    trustModalText.textContent = button.dataset.text;
+    trustModal.classList.add('open');
+    trustModal.setAttribute('aria-hidden', 'false');
+    trustClose.focus();
+  });
+});
+
+function closeTrustModal() {
+  trustModal.classList.remove('open');
+  trustModal.setAttribute('aria-hidden', 'true');
+}
+
+trustClose.addEventListener('click', closeTrustModal);
+trustModal.addEventListener('click', (event) => {
+  if (event.target === trustModal) closeTrustModal();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && trustModal.classList.contains('open')) closeTrustModal();
+});
+</script>
+
 </body>
 </html>
